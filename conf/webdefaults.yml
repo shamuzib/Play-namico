@@ -1,0 +1,3 @@
+--- #Webdefault file
+apache_version: 1.2
+apache_mod_req: yes

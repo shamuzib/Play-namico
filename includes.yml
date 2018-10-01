@@ -1,0 +1,12 @@
+--- #Include statement
+- hosts: RedHat
+  remote_user: test
+  connection: ssh
+  become: yes
+  gather_facts: yes
+  vars_files:
+  - vars/vars.yml
+  tasks:
+  - include: tasks/tasks.yml
+  - name: testing telnet
+    raw: yum list installed | grep telnet > /home/test/pkgs.log

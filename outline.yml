@@ -1,0 +1,30 @@
+--- #This is outline example
+- hosts: all
+  remote_user: test
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+  - name: gather pre timestamp
+    shell: /bin/date >> /home/test/pretime.log
+  - name: Installing packages on RedHat
+    yum: pkg={{ item }} state=installed
+    with_items:
+    - httpd
+    - lynx
+    - telnet
+    when: ansible_os_family == 'RedHat'
+    register: nami
+  - debug: var=nami
+  - name: Installing Packages on Debian
+    apt: pkg={{ item }} state=installed
+    with_items:
+    - apache2
+    - lynx
+    - telnet
+    when: ansible_os_family == 'Debian'
+    ignore_errors: yes
+    register: sami
+  - debug: var=sami
+  - name: gather post timestamp
+    shell: /bin/date >> /home/test/posttime.log 

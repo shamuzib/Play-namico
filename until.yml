@@ -1,0 +1,12 @@
+--- #UNTIL Playbook
+- hosts: RedHat
+  remote_user: test
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+  - name: Install Apache Server
+    yum: pkg=httpd state=installed
+  - name: Verify Apache Server is running
+    shell: systemctl status httpd
+    ignore_errors: yes

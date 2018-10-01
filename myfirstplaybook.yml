@@ -1,0 +1,23 @@
+--- #My First Playbook
+- hosts: RedHat
+  remote_user: test
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+   playbook_version: 1.2b
+  vars_files:
+  - conf/copyright.yml
+  - conf/webdefaults.yml
+  tasks:
+  - name: Installing apacheserver usring YUM
+    yum: pkg=httpd state=installed
+  - name: Verifing lynx
+    yum: name=lynx state=present
+    register: state
+  - debug: var=state
+  - name: Adding users to systems
+    user: name={{ item }} state=present group=test shell=/bin/bash
+    with_items:
+    - user1
+    - user2

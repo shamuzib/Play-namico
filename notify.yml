@@ -1,0 +1,14 @@
+--- #NOTIFY Playbook
+- hosts: RedHat
+  remote_user: test
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+  - name: Install & notify
+    yum: pkg=httpd state=installed
+    notify: restart HTTPD
+  handlers:
+  - name: restart HTTPD
+    service: name=httpd state=restarted
+

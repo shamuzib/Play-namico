@@ -1,0 +1,9 @@
+--- #Variable user
+- hosts: '{{ hosts }}'
+  remote_user: '{{ user }}'
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+  - name: Install httpd
+    yum: pkg={{ packages }} state=installed

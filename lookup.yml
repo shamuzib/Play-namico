@@ -1,0 +1,8 @@
+--- #LOOKUP Playbook
+- hosts: all
+  remote_user: test
+  become: yes
+  gather_facts: yes
+  connection: ssh
+  tasks:
+  - debug: msg="{{ lookup('env','HOME') }} is the value lsted"

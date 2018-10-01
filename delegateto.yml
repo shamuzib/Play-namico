@@ -1,0 +1,12 @@
+--- #DELEGATE TO
+- hosts: all
+  become: yes
+  remote_user: test
+  gather_facts: no
+  connection: ssh
+  tasks:
+  - name: pinging all severs
+    ping:
+    delegate_to: namico4.mylabserver.com
+    register: nam
+  - debug: var=nam

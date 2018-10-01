@@ -1,0 +1,15 @@
+--- #TAGS Module
+- hosts: RedHat
+  remote_user: test
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+  - name: Install LYNX
+    yum: pkg=lynx state=installed
+    tags:
+    - packages
+  - name: Verify lynx
+    raw: yum list insatlled | lynx >> /home/test/pkg.log
+    tags:
+    - loggings
